@@ -93,5 +93,23 @@ $(document).ready(function(){
     draw();
    }
   }
-  
+
+  function draw(){
+    context.clearRect(0,0, canvas.width, canvas.height);
+    context.fillStyle = "green";
+    context.fillRect(candy.x * gridSize, cady.y * gridSize, gridSize, gridSize);
+
+    //Draw the snake
+    for (var i = 0; i < player.tail; i++){
+      context.fillStyle= "GoldenRod";
+      context.fillRect(snakeBody[i][0] * gridSize, snakeBody[i][1] * gridSize, gridSize, gridSize);
+    }
+  }
+
+    update();
+    var updates = setInterval(update, 100);
+
+    $(window).on("keydown", function(event){
+    keyPressed = event.which;
+    });
 })
