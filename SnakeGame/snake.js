@@ -1,6 +1,8 @@
+console.log("test");
+
 $(document).ready(function(){
-   var c = document.getElementById("myCanvas");
-   var context = c.getContext("2d");
+   var canvas = document.getElementById("myCanvas");
+   var context = canvas.getContext("2d");
    var gridNum = 20;
    var gridSize = canvas.width / gridNum;
 
@@ -8,8 +10,8 @@ $(document).ready(function(){
    	tail: 1,
    	x: 7,
    	y: 7,
-   	direction: 5;
-   	alive: true;
+   	direction: 5,
+   	alive: true
    }
    //up 2 down 3 //
    var candy = {
@@ -42,7 +44,7 @@ $(document).ready(function(){
         do {
              collided = false;
              for(var i =0; i < player.tail; i++){
-             	if(candy.x = snakeBody{i][0]  && candy.y == snakeBody[i][1]){
+             	if(candy.x = snakeBody[i][0]  && candy.y == snakeBody[i][1]){
              		collided = true;
              		candy.x = Math.floor(Math.random()*gridNum);
                     candy.y = Math.floor(Math.random()*gridNum);
@@ -54,9 +56,14 @@ $(document).ready(function(){
         candy.alive = true;
 
    	}
+
+    if(candy.x == player.x && candy.y == player.y){
+      player.tail ++;
+      candy.alive = false;
+    }
     
 
-   }if (player.x < 0 || player.x >= gridNum || player.y < 0 || player.y >= girdNum){
+   if (player.x < 0 || player.x >= gridNum || player.y < 0 || player.y >= gridNum){
           player.alive = false
           clearInterval(updates);
     }
@@ -82,10 +89,10 @@ $(document).ready(function(){
     player.x -= 1;
     break;
     case 2:
-    player.y += 1;
+    player.y -= 1;
     break;
     case 3:
-    player.y -= 1;
+    player.y += 1;
     break;
    }
 
@@ -97,7 +104,7 @@ $(document).ready(function(){
   function draw(){
     context.clearRect(0,0, canvas.width, canvas.height);
     context.fillStyle = "green";
-    context.fillRect(candy.x * gridSize, cady.y * gridSize, gridSize, gridSize);
+    context.fillRect(candy.x * gridSize, candy.y * gridSize, gridSize, gridSize);
 
     //Draw the snake
     for (var i = 0; i < player.tail; i++){
